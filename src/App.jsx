@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import {useEffect} from "react";
 import { Routes,Route } from "react-router-dom";
 import Home from './pages/Home';
 import Users from "./components/Users/Users";
@@ -12,13 +12,13 @@ import Login from "./auth/Login";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import BlogEdit from "./components/Blog/BlogEdit";
+// import CareerDetails from "./components/Carrer/CarrerDetials";
+import CarrerCreate from './components/Carrer/CarrerCreate'
+import CareerDetails from "./components/Carrer/CarrerDetials";
 
 const App = () => {
   const user = useSelector((state) => state.auth.user)
   const navigate = useNavigate()
-
-
-
 
   useEffect(() => {
     if(user){
@@ -47,6 +47,9 @@ const App = () => {
             <Route path="/users" element={<Users/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/carrer" element={<Carrer/>}/>
+            <Route path="/career/create" element={<CarrerCreate/>}/>
+            <Route path="/career/details/:id" element={<CareerDetails  />} />
+            <Route path="/career/edit/:id" element={<BlogEdit/>} />
             <Route path="/blog" element={<Blog/>}/>
             <Route path="/blog/create" element={<BlogCreate/>}/>
             <Route path="/blog/details/:id" element={<BlogDetails />} />
