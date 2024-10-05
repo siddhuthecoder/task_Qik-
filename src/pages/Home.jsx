@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { CiLogout, CiPhone } from "react-icons/ci";
 import { FaBlackTie, FaUsers } from "react-icons/fa";
 import { FaBlogger } from "react-icons/fa6";
@@ -9,7 +9,7 @@ const topBarTabs = [
   { label: 'Users', path: 'users',icon: FaUsers },
   { label: 'Contact', path: 'contact',icon: CiPhone  },
   { label: 'Blog', path: 'blog' ,icon: FaBlogger },
-  { label: 'Carrer', path: 'Carrer' ,icon: FaBlackTie},
+  { label: 'Carrer', path: 'carrer' ,icon: FaBlackTie},
 ];
 
 // const sidebarItems = [

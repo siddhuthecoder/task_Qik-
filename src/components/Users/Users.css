@@ -1,0 +1,134 @@
+/* Basic styling for the container */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    color: #5E81F4; /* Your preferred color for the heading */
+    text-align: center;
+  }
+  
+  button {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #5E81F4; /* Button background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #3f5bd8; /* Darker shade on hover */
+  }
+  
+  /* Table styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #5E81F4;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #e9e9e9;
+  }
+  
+  /* Modal styles */
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+  }
+  
+  .modal h2 {
+    color: #333;
+  }
+  
+  .modal label {
+    display: block;
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  .modal input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .modal button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #5E81F4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal button:hover {
+    background-color: #3f5bd8;
+  }
+  
+  /* Backdrop overlay when modal is open */
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  /* Flexbox for centering content */
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Add some spacing between form elements */
+  form label {
+    display: block;
+    margin: 10px 0 5px 0;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
