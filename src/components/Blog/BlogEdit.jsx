@@ -1,48 +1,67 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import ReactQuill from 'react-quill'; // Import React Quill
-import 'react-quill/dist/quill.snow.css'; // Import styles for React Quill
-import API_ROUTES from '../../utils/routes'; // Adjust the path as needed
+import { useParams, useNavigate } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+// import API_ROUTES from '../../utils/routes'; 
 
-const CreateBlog = () => {
+const BlogEdit = () => {
+  const { id } = useParams(); // Get the blog ID from the URL parameters
   const [title, setTitle] = useState('');
   const [shortContent, setShortContent] = useState('');
   const [content, setContent] = useState('');
   const [categories, setCategories] = useState('');
   const [tags, setTags] = useState('');
   const [status, setStatus] = useState('draft');
-  const [imageUrl, setImageUrl] = useState(''); // Added state for image URL
+  const [imageUrl, setImageUrl] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetchBlogDetails();
+  }, [id]);
+
+  const fetchBlogDetails = async () => {
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+    const url = `${BASE_URL}/blogs/${id}`;
+
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+        },
+      });
+      const blog = response.data;
+      setTitle(blog.title);
+      setShortContent(blog.shortContent);
+      setContent(blog.content);
+      setCategories(blog.categories.join(', '));
+      setTags(blog.tags.join(', '));
+      setStatus(blog.status);
+      setImageUrl(blog.image);
+    } catch (err) {
+      setError('Failed to load blog details');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Log current state before submission
-    console.log('Submitting Blog:', {
-      title,
-      shortContent,
-      content,
-      categories: categories.split(',').map(category => category.trim()),
-      tags: tags.split(',').map(tag => tag.trim()),
-      status,
-      imageUrl, // Include image URL in log
-    });
 
-    // Create a newBlog object with the image URL
-    const newBlog = {
+    const updatedBlog = {
       title,
       shortContent,
       content,
       categories: categories.split(',').map(category => category.trim()),
       tags: tags.split(',').map(tag => tag.trim()),
       status,
-      image:imageUrl, // Include image URL in submission
+      image: imageUrl,
     };
 
     try {
-      const response = await axios.post(API_ROUTES.createBlog, newBlog, {
+      const BASE_URL = import.meta.env.VITE_BASE_URL;
+      const url = `${BASE_URL}/blogs/${id}`;
+      const response = await axios.put(url, updatedBlog, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
@@ -50,26 +69,25 @@ const CreateBlog = () => {
       });
 
       alert(response.data.message);
-      navigate('/blog'); // Navigate back to the blog list after creating
+      navigate(`/blog`); // Navigate to the blog details page after editing
     } catch (err) {
-      setError(err.response?.data.message || 'Error creating blog post');
+      setError(err.response?.data.message || 'Error updating blog post');
     }
   };
 
-  // Define the toolbar options for React Quill
   const modules = {
     toolbar: [
-      [{ 'header': [1, 2, false] }], // Header options
-      ['bold', 'italic', 'underline'], // Formatting options
-      ['link', 'image', 'video'], // Link and media options
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }], // List options
-      ['clean'], // Remove formatting button
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline'],
+      ['link', 'image', 'video'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      ['clean'],
     ],
   };
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Create New Blog</h1>
+      <h1 className="text-2xl font-bold mb-4">Edit Blog</h1>
       {error && <div className="text-red-500 mb-4">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -84,19 +102,19 @@ const CreateBlog = () => {
         </div>
         <div>
           <label className="block text-sm font-medium">Short Content</label>
-          <ReactQuill 
+          <ReactQuill
             value={shortContent}
             onChange={setShortContent}
-            modules={modules} // Pass the custom modules
+            modules={modules}
             className="mt-1 block w-full"
           />
         </div>
         <div>
           <label className="block text-sm font-medium">Content</label>
-          <ReactQuill 
+          <ReactQuill
             value={content}
             onChange={setContent}
-            modules={modules} // Pass the custom modules
+            modules={modules}
             className="mt-1 block w-full"
           />
         </div>
@@ -119,7 +137,7 @@ const CreateBlog = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium">Image URL</label> {/* New image URL input */}
+          <label className="block text-sm font-medium">Image URL</label>
           <input
             type="text"
             value={imageUrl}
@@ -137,15 +155,15 @@ const CreateBlog = () => {
           >
             <option value="draft">Draft</option>
             <option value="published">Published</option>
-            <option value="archived">Archived</option> {/* Added Archived option */}
+            <option value="archived">Archived</option>
           </select>
         </div>
         <button type="submit" className="mt-4 px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300">
-          Create Blog
+          Update Blog
         </button>
       </form>
     </div>
   );
 };
 
-export default CreateBlog;
+export default BlogEdit;

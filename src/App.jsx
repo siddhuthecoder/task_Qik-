@@ -11,6 +11,7 @@ import BlogCreate from "./components/Blog/BlogCreate";
 import Login from "./auth/Login";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import BlogEdit from "./components/Blog/BlogEdit";
 
 const App = () => {
   const user = useSelector((state) => state.auth.user)
@@ -51,6 +52,10 @@ const App = () => {
             <Route path="/blog/details/:id" element={<BlogDetails />} />
             <Route path="/login" element={<Login />} />
             {/* <Route path="/blog/edit/:id" element={<BlogEdit />} /> */}
+            <Route path="/blog/edit/:id" element={<BlogEdit />} />
+            
+            
+            
           </Routes>
         </Home>
       </>

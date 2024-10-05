@@ -57,11 +57,12 @@ const BlogDetails = () => {
       <h1 className="text-3xl font-semibold mb-4">{blog.title}</h1>
       <img src={blog.image} alt={blog.title} className="w-full h-64 object-cover mb-4" />
       
-      <p className="text-gray-800 mb-4">{blog.shortContent}</p> {/* Show short content */}
-      
+      <div className="text-gray-800 mb-4" dangerouslySetInnerHTML={{ __html: blog.shortContent }} />
+ {/* Show short content */}
+      {/* https://drive.google.com/drive/folders/1HOisQKXaMyBh2UqtV6IQOeXHVQxvcik9 */}
       <div className="text-gray-600 mb-4">
         <h2 className="text-xl font-medium">Content</h2>
-        <p>{blog.content}</p> {/* Display detailed content */}
+        <div dangerouslySetInnerHTML={{ __html: blog.content }} /> {/* Display detailed content as HTML */}
       </div>
 
       {/* Display additional blog details */}
