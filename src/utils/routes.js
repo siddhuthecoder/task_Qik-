@@ -1,7 +1,7 @@
 // routes.js
 
 // Base URL
-const BASE_URL = 'http://localhost:8000/api';
+const BASE_URL = 'https://ohm-audits-webiste-backend.onrender.com/api';
 
 // API Endpoints
 const API_ROUTES = {
