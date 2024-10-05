@@ -53,7 +53,7 @@ const BlogDetails = () => {
   if (error) return <div className="text-red-500">{error}</div>; // Show error message
 
   return (
-    <div className="p-6">
+    <div className="p-6 mb-[60px]">
       <h1 className="text-3xl font-semibold mb-4">{blog.title}</h1>
       <img src={blog.image} alt={blog.title} className="w-full h-64 object-cover mb-4" />
       
