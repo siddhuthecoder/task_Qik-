@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import API_ROUTES from '../../utils/routes'; // Assuming routes.js contains the API endpoints
+import { useSelector } from 'react-redux';
 
 const Contact = () => {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('development');
+  const user = useSelector((state) => state.auth.user)
 
   useEffect(() => {
     fetchContacts();
@@ -18,7 +20,7 @@ const Contact = () => {
       const response = await axios.get(API_ROUTES.getAllContacts, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+          Authorization: `Bearer ${user.token}`,
         },
       });
       setContacts(response.data);

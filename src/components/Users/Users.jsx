@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import API_ROUTES from '../../utils/routes'; // Assuming routes.js contains the API endpoints
+import { useSelector } from 'react-redux';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -10,6 +11,8 @@ const Users = () => {
   const [showModal, setShowModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const user = useSelector((state) => state.auth.user)
+  console.log(user)
 
   useEffect(() => {
     fetchUsers();
@@ -22,7 +25,7 @@ const Users = () => {
       const response = await axios.get(API_ROUTES.getAdmins, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`
+          Authorization: `Bearer ${user.token}`
         }
       });
       setUsers(response.data);

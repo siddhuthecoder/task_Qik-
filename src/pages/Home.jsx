@@ -5,6 +5,10 @@ import { FaBlogger } from "react-icons/fa6";
 import { HiOutlineViewList } from 'react-icons/hi';
 import { VscChromeClose } from 'react-icons/vsc';
 import { Link, useLocation } from 'react-router-dom';
+import { signOut } from '../store/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 const topBarTabs = [
   { label: 'Users', path: 'users',icon: FaUsers },
   { label: 'Contact', path: 'contact',icon: CiPhone  },
@@ -20,6 +24,8 @@ const topBarTabs = [
 // ];
 
 const Home = ({ children }) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [width, setWidth] = useState(window.innerWidth);
   const [show, setShow] = useState(width < 768);
 
@@ -32,6 +38,12 @@ const Home = ({ children }) => {
     window.addEventListener('resize', handleWidth);
     return () => window.removeEventListener('resize', handleWidth);
   }, []);
+
+  const handleSignOut = () => {
+    dispatch(signOut()); // This will trigger the signOut action and clear the user data
+    // window.location.reload()
+    navigate("/")
+  };
 
   const location = useLocation();
   const pathArray = location.pathname.split("/");
@@ -55,7 +67,7 @@ const Home = ({ children }) => {
               {tab.label}
             </Link>
           ))}
-          <div className="tab font-semibold mx-[20px] px-4 py-1 rounded-md flex items-center bg-[black] text-white">
+          <div className="tab font-semibold mx-[20px] px-4 py-1 hover:bg-zinc-900 rounded-md flex items-center bg-[black] text-white cursor-pointer" onClick={() => handleSignOut()}>
             <span className="pe-2"><CiLogout /></span>
             <span>Log Out</span>
           </div>
