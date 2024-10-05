@@ -54,8 +54,6 @@ const App = () => {
             {/* <Route path="/blog/edit/:id" element={<BlogEdit />} /> */}
             <Route path="/blog/edit/:id" element={<BlogEdit />} />
             
-            
-            
           </Routes>
         </Home>
       </>
