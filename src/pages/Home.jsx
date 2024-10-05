@@ -1,30 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { CiLogout, CiPhone } from "react-icons/ci";
+import { FaBlackTie, FaUsers } from "react-icons/fa";
+import { FaBlogger } from "react-icons/fa6";
 import { HiOutlineViewList } from 'react-icons/hi';
 import { VscChromeClose } from 'react-icons/vsc';
 import { Link, useLocation } from 'react-router-dom';
-import { FaCube, FaLock } from 'react-icons/fa';
-import { IoMdHome } from 'react-icons/io';
-import { RiLightbulbFlashFill } from 'react-icons/ri';
-import { BiLogoMicrosoftTeams } from 'react-icons/bi';
-import { GrTemplate } from 'react-icons/gr';
-import { BsFillLockFill } from 'react-icons/bs';
-import { FaUnlockAlt } from "react-icons/fa";
-
-import { FiSearch } from "react-icons/fi";
-
 const topBarTabs = [
-  { label: 'Dashboard', path: '',icon: RiLightbulbFlashFill },
-  { label: 'Realtime', path: 'main',icon: IoMdHome  },
-  { label: 'Report', path: 'report' ,icon: BiLogoMicrosoftTeams },
-  { label: 'Alerts', path: 'alerts' ,icon: GrTemplate},
+  { label: 'Users', path: 'users',icon: FaUsers },
+  { label: 'Contact', path: 'contact',icon: CiPhone  },
+  { label: 'Blog', path: 'blog' ,icon: FaBlogger },
+  { label: 'Carrer', path: 'Carrer' ,icon: FaBlackTie},
 ];
 
-const sidebarItems = [
-  { label: 'Dashboard', icon: RiLightbulbFlashFill },
-  { label: 'Realtime', icon: IoMdHome },
-  { label: 'Report', icon: BiLogoMicrosoftTeams },
-  { label: 'Alerts', icon: GrTemplate },
-];
+// const sidebarItems = [
+//   { label: 'Users', icon: FaUsers },
+//   { label: 'Contact', icon: CiPhone },
+//   { label: 'Blog', icon: FaBlogger },
+//   { label: 'Carrer', icon: FaBlackTie },
+// ];
 
 const Home = ({ children }) => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -50,10 +43,6 @@ const Home = ({ children }) => {
         <div className="flex items-center">
           <HiOutlineViewList className="text-2xl mx-3 block md:hidden" onClick={() => setShow(!show)} />
           <Link to ="/" className="logo select-none font-semibold px-3 logo text-2xl">The <span className="text-red-500 logo">Trio</span> </Link>
-          <div className="flex mx-4 items-center relative">
-            <FiSearch className="absolute left-[10px] hidden md:block z-[2] pointer-events-none" />
-            <input type="text" className="shadow-md hidden md:block rounded-full ps-[30px] bg-[transparent] h-[30px] border" placeholder='search...' />
-          </div>
         </div>
 
         <div className="flex items-center text-[grey]">
@@ -67,8 +56,8 @@ const Home = ({ children }) => {
             </Link>
           ))}
           <div className="tab font-semibold mx-[20px] px-4 py-1 rounded-md flex items-center bg-[black] text-white">
-            <span className="pe-2"><FaUnlockAlt /></span>
-            <span>Login</span>
+            <span className="pe-2"><CiLogout /></span>
+            <span>Log Out</span>
           </div>
         </div>
       </div>

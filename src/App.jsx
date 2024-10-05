@@ -1,9 +1,9 @@
-import React from 'react'
-import { Routes, Route } from "react-router-dom";
-import Home from './pages/Home'
-import Main from './pages/Main';
-import Dashboard from './pages/Dashboard';
-import Report from './pages/Report';
+import { Routes,Route } from "react-router-dom";
+import Home from './pages/Home';
+import Users from "./components/Users/Users";
+import Contact from "./components/Contact/Contact";
+import Carrer from "./components/Carrer/Carrer";
+import Blog from "./components/Blog/Blog"
 
 const App = () => {
   return (
@@ -12,8 +12,12 @@ const App = () => {
         <Home>
           <Routes>
             {/* <Route path="/" element={<Main  />} /> */}
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/main"  element={<Main />} />
+            <Route path="/users" element={<Users/>}/>
+            <Route path="/contact" element={<Contact/>}/>
+            <Route path="/carrer" element={<Carrer/>}/>
+            <Route path="/blog" element={<Blog/>}/>
+            
+            
           </Routes>
         </Home>
       </>
