@@ -1,9 +1,11 @@
-import React,{useEffect, useState} from "react";
+import {useEffect} from "react";
 import { Routes,Route } from "react-router-dom";
 import Home from './pages/Home';
 import Users from "./components/Users/Users";
 import Contact from "./components/Contact/Contact";
 import Carrer from "./components/Carrer/Carrer";
+import CarrerDetails from "./components/Carrer/CarrerDetials";
+import CreateCareer from "./components/Carrer/CarrerCreate";
 import Blog from "./components/Blog/Blog"
 import BlogDetails from "./components/Blog/BlogDetials";
 // import BlogEdit from "./components/Blog/BlogEdit";
@@ -16,9 +18,6 @@ import BlogEdit from "./components/Blog/BlogEdit";
 const App = () => {
   const user = useSelector((state) => state.auth.user)
   const navigate = useNavigate()
-
-
-
 
   useEffect(() => {
     if(user){
@@ -47,15 +46,14 @@ const App = () => {
             <Route path="/users" element={<Users/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/carrer" element={<Carrer/>}/>
+            <Route path="/carrer/create" element={<CreateCareer/>}/>
+            <Route path="/carrer/details/:id" element={<CarrerDetails/>}/>
             <Route path="/blog" element={<Blog/>}/>
             <Route path="/blog/create" element={<BlogCreate/>}/>
             <Route path="/blog/details/:id" element={<BlogDetails />} />
             <Route path="/login" element={<Login />} />
             {/* <Route path="/blog/edit/:id" element={<BlogEdit />} /> */}
-            <Route path="/blog/edit/:id" element={<BlogEdit />} />
-            
-            
-            
+            <Route path="/blog/edit/:id" element={<BlogEdit/>} />
           </Routes>
         </Home>
       </>
