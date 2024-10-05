@@ -46,7 +46,7 @@ const Blog = () => {
             <img src={blog.image} alt={blog.title} className="w-full h-48 object-cover" />
             <div className="p-4">
               <h2 className="text-xl font-semibold">{blog.title}</h2>
-              <p className="text-gray-600">{blog.shortContent}</p>
+              <div className="text-gray-800 mb-4" dangerouslySetInnerHTML={{ __html: blog.shortContent }} />
               <Link
                 to={`/blog/details/${blog._id}`}
                 className="inline-block mt-4 px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300"
