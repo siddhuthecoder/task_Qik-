@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
-import ReactQuill from 'react-quill'; // Importing the React Quill library
-import 'react-quill/dist/quill.snow.css'; // Importing the Quill styles
-import './CreateCareer.css'; // Custom styles for animations
-import API_ROUTES from '../../utils/routes'; // Adjust the path as needed
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import './CreateCareer.css';
+import API_ROUTES from '../../utils/routes';
 
 const CreateCareer = () => {
     const [formData, setFormData] = useState({
@@ -27,10 +27,12 @@ const CreateCareer = () => {
         applicationInstructions: '',
     });
 
+    // Handle Quill changes for rich text fields
     const handleQuillChange = (field, value) => {
         setFormData({ ...formData, [field]: value });
     };
 
+    // Handle changes for standard input fields
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData({
@@ -39,17 +41,14 @@ const CreateCareer = () => {
         });
     };
 
+    // Handle changes for skills input
     const handleSkillsChange = (e) => {
-        const options = e.target.options;
-        const value = [];
-        for (let i = 0; i < options.length; i++) {
-            if (options[i].selected) {
-                value.push(options[i].value);
-            }
-        }
-        setFormData({ ...formData, skills: value });
+        const value = e.target.value;
+        const skillsArray = value.split(',').map(skill => skill.trim()).filter(skill => skill); // Split, trim, and filter out empty strings
+        setFormData({ ...formData, skills: skillsArray });
     };
 
+    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -61,6 +60,27 @@ const CreateCareer = () => {
             });
 
             console.log('Career created successfully', response.data);
+            // Optionally reset the form after successful submission
+            setFormData({
+                title: '',
+                description: '',
+                qualifications: '',
+                responsibilities: '',
+                skills: [],
+                benefits: '',
+                location: '',
+                jobType: 'Full-Time',
+                salaryRange: '',
+                applicationDeadline: '',
+                experience: '',
+                jobCategory: 'Other',
+                applicationLink: '',
+                contactEmail: '',
+                remote: false,
+                company: '',
+                companyWebsite: '',
+                applicationInstructions: '',
+            });
         } catch (error) {
             console.error('Error creating career', error.response.data);
         }
@@ -116,21 +136,15 @@ const CreateCareer = () => {
 
                 {/* Skills */}
                 <div>
-                    <label className="block text-gray-700 font-medium mb-2">Skills (Select multiple)</label>
-                    <select
+                    <label className="block text-gray-700 font-medium mb-2">Skills (Separate with commas)</label>
+                    <input
+                        type="text"
                         name="skills"
-                        multiple
-                        value={formData.skills}
+                        // value={formData.skills.join(', ')} // Join the skills array for display
                         onChange={handleSkillsChange}
-                        className="form-select w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                    >
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Python">Python</option>
-                        <option value="Java">Java</option>
-                        <option value="C++">C++</option>
-                        <option value="HTML">HTML</option>
-                        <option value="CSS">CSS</option>
-                    </select>
+                        className="form-input w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+                        placeholder="e.g., JavaScript, Python, Java"
+                    />
                 </div>
 
                 {/* Benefits */}
@@ -276,6 +290,18 @@ const CreateCareer = () => {
                     />
                 </div>
 
+                {/* Remote */}
+                <div className="flex items-center">
+                    <input
+                        type="checkbox"
+                        name="remote"
+                        checked={formData.remote}
+                        onChange={handleChange}
+                        className="mr-2"
+                    />
+                    <label className="text-gray-700">Remote</label>
+                </div>
+
                 {/* Application Instructions */}
                 <div>
                     <label className="block text-gray-700 font-medium mb-2">Application Instructions</label>
@@ -286,22 +312,10 @@ const CreateCareer = () => {
                     />
                 </div>
 
-                {/* Remote Option */}
-                <div className="flex items-center">
-                    <input
-                        type="checkbox"
-                        name="remote"
-                        checked={formData.remote}
-                        onChange={handleChange}
-                        className="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded"
-                    />
-                    <label className="ml-2 text-gray-700 font-medium">Remote Option</label>
-                </div>
-
                 {/* Submit Button */}
                 <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition duration-200"
+                    className="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition duration-300"
                 >
                     Create Job Posting
                 </button>

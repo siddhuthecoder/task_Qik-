@@ -45,7 +45,7 @@ const Career = () => {
           <div key={job._id} className="bg-white shadow-md rounded-lg overflow-hidden">
             <div className="p-4">
               <h2 className="text-xl font-semibold">{job.title}</h2>
-              <p className="text-gray-800 mb-4">{job.description}</p>
+              <p className="text-gray-800 mb-4">{job.description.replace(/<[^>]+>/g, '')}</p>
               <p className="text-gray-600">Location: {job.location}</p>
               <p className="text-gray-600">Type: {job.jobType}</p>
               <Link

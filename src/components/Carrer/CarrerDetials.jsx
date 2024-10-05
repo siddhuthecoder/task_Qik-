@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import parse from 'html-react-parser'; // Import html-react-parser
 
 const CareerDetails = () => {
   const { id } = useParams(); // Get the career ID from the URL parameters
@@ -55,17 +56,16 @@ const CareerDetails = () => {
   return (
     <div className="p-6">
       <h1 className="text-3xl font-semibold mb-4">{career.title}</h1>
-      <div className="text-gray-800 mb-4" dangerouslySetInnerHTML={{ __html: career.description }} />
-      {/* Show job description */}
+      <div className="text-gray-800 mb-4">{parse(career.description)}</div> {/* Render description */}
 
       <div className="mb-4">
         <h2 className="text-xl font-medium">Qualifications</h2>
-        <p>{career.qualifications}</p>
+        <div>{parse(career.qualifications)}</div> {/* Render qualifications */}
       </div>
 
       <div className="mb-4">
         <h2 className="text-xl font-medium">Responsibilities</h2>
-        <p>{career.responsibilities}</p>
+        <div>{parse(career.responsibilities)}</div> {/* Render responsibilities */}
       </div>
 
       <div className="mb-4">
@@ -75,7 +75,7 @@ const CareerDetails = () => {
 
       <div className="mb-4">
         <h2 className="text-xl font-medium">Benefits</h2>
-        <p>{career.benefits}</p>
+        <div>{parse(career.benefits)}</div> {/* Render benefits */}
       </div>
 
       <div className="mb-4">
