@@ -15,6 +15,8 @@ import BlogEdit from "./components/Blog/BlogEdit";
 // import CareerDetails from "./components/Carrer/CarrerDetials";
 import CarrerCreate from './components/Carrer/CarrerCreate'
 import CareerDetails from "./components/Carrer/CarrerDetials";
+import CarrerEdit from "./components/Carrer/CarrerEdit";
+
 
 const App = () => {
   const user = useSelector((state) => state.auth.user)
@@ -49,7 +51,7 @@ const App = () => {
             <Route path="/carrer" element={<Carrer/>}/>
             <Route path="/career/create" element={<CarrerCreate/>}/>
             <Route path="/career/details/:id" element={<CareerDetails  />} />
-            <Route path="/career/edit/:id" element={<BlogEdit/>} />
+            <Route path="/career/edit/:jobId" element={<CarrerEdit/>} />
             <Route path="/blog" element={<Blog/>}/>
             <Route path="/blog/create" element={<BlogCreate/>}/>
             <Route path="/blog/details/:id" element={<BlogDetails />} />

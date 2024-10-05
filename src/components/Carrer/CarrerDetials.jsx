@@ -44,7 +44,7 @@ const CareerDetails = () => {
           Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`, // Use API key for authentication
         },
       });
-      navigate('/careers'); // Redirect to the career list after deletion
+      navigate('/career'); // Redirect to the career list after deletion
     } catch (err) {
       setError('Failed to delete the career posting'); // Set error if deletion fails
     }
@@ -153,7 +153,7 @@ const CareerDetails = () => {
       </div>
 
       <div className="flex space-x-4">
-        <Link to={`/careers/edit/${career._id}`} className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300">
+        <Link to={`/career/edit/${career._id}`} className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300">
           Edit
         </Link>
         <button onClick={handleDelete} className="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition duration-300">
